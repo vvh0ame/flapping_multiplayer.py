@@ -13,7 +13,7 @@ class FlappingMultiplayer:
 		self.ii = None
 		self.chat_version = "4.6"
 
-	def auth_with_ii(self, ii: str):
+	def login_with_ii(self, ii: str):
 		self.ii = ii
 		return self.ii
 
@@ -78,6 +78,7 @@ class FlappingMultiplayer:
 			statistics: list,
 			values: list):
 		data = dict(zip(statistics, values))
+		return requests.post(
 			f"{self.game_api}/rankdb.php",
 			data=data,
 			headers=self.headers).text
@@ -91,3 +92,4 @@ class FlappingMultiplayer:
 			f"{self.game_api}/ins_sc.php",
 			data=data,
 			headers=self.headers).text
+		
