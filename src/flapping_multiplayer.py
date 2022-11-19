@@ -3,7 +3,7 @@ from time import time
 from random import randint
 
 class FlappingMultiplayer:
-	def __init__(self):
+	def __init__(self) -> None:
 		self.chat_api = "http://www.fakemon.net/chat"
 		self.game_api = "http://www.browsergamer.net/fo"
 		self.main_api = "http://www.flappingonline.com/fo"
@@ -13,11 +13,11 @@ class FlappingMultiplayer:
 		self.ii = None
 		self.chat_version = "4.6"
 
-	def login_with_ii(self, ii: str):
+	def login_with_ii(self, ii: str) -> str:
 		self.ii = ii
 		return self.ii
 
-	def get_country(self):
+	def get_country(self) -> str:
 		return requests.get(
 			f"{self.main_api}/country.php",
 			headers=self.headers).text
@@ -26,7 +26,7 @@ class FlappingMultiplayer:
 			self,
 			dv: int = 0,
 			server_id: int = 1,
-			mn: int = 1):
+			mn: int = 1) -> str:
 		return requests.get(
 			f"{self.main_api}/level_rank.php?dv={dv}&sv={server_id}&ii={self.ii}&mn={mn}",
 			headers=self.headers).text
@@ -35,7 +35,7 @@ class FlappingMultiplayer:
 			self,
 			id: int = 1,
 			dv: int = 0,
-			server_id: int = 1):
+			server_id: int = 1) -> str:
 		return requests.get(
 			f"{self.game_api}/level{id}.php?dv={dv}&sv={server_id}&ii={self.ii}",
 			headers=self.headers).text
@@ -43,7 +43,7 @@ class FlappingMultiplayer:
 	def get_chat(
 			self,
 			chat_type: str = "all",
-			dv: int = 0):
+			dv: int = 0) -> str:
 		return requests.get(
 			f"{self.chat_api}/get_chat.php?c={chat_type}&v={self.chat_version}&dv={dv}",
 			headers=self.headers).text
@@ -55,7 +55,7 @@ class FlappingMultiplayer:
 			rk: int = 10000,
 			d: int = 0,
 			chat_type: str = "all",
-			country_code: str = "us"):
+			country_code: str = "us") -> int:
 		data = {
 			"p": randint(0, 60000),
 			"dt": time() * 1000,
@@ -76,7 +76,7 @@ class FlappingMultiplayer:
 	def rank_db(
 			self,
 			statistics: list,
-			values: list):
+			values: list) -> str:
 		data = dict(zip(statistics, values))
 		return requests.post(
 			f"{self.game_api}/rankdb.php",
@@ -86,7 +86,7 @@ class FlappingMultiplayer:
 	def insert_score(
 			self,
 			statistics: list,
-			values: list):
+			values: list) -> str:
 		data = dict(zip(statistics, values))
 		return requests.post(
 			f"{self.game_api}/ins_sc.php",
