@@ -6,7 +6,7 @@ Mobile-API for [Flapping Together](https://play.google.com/store/apps/details?id
 async function main() {
 	const { FlappingTogether } = require("./flapping_together.js")
 	const flappingTogether = new FlappingTogether()
-  flappingTogether.login_with_ii("ii")
+	flappingTogether.login_with_ii("ii")
 }
 
 main()
